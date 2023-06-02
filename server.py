@@ -98,8 +98,8 @@ def scrap_url(input,page_id):
     chrome_options.add_argument(f"--user-agent={user_agent.random}")
     driver = webdriver.Chrome(executable_path='/chromedriver', options=chrome_options)
 
-    encoded_name = quote(input)
-    search_url = f"https://www.imenik.hr/imenik/trazi/{page_id}/Osobe/sve/sve/vaznost/{encoded_name}.html"
+    encoded_input = quote(input)
+    search_url = f"https://www.imenik.hr/imenik/trazi/{page_id}/Osobe/sve/sve/vaznost/{encoded_input}.html"
 
     driver.get(search_url)
     html = driver.page_source
