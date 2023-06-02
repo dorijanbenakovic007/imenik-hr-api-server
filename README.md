@@ -43,7 +43,20 @@ Pošaljite POST zahtjev na URL `/contacts` s sljedećim JSON tijelom:
 - "input": Unesite ime i prezime osobe koju želite pretražiti. Također možete upisati i druge podatke kao što je adresa ili broj telefona
 - "page_id" (opcionalno): Broj stranice za pretraživanje. Ako nije navedeno, koristit će se stranica 1.
 
-Program će izvršiti pretraživanje na Imenik.hr stranici i vratiti rezultate kao JSON odgovor.
+Program će izvršiti pretraživanje na Imenik.hr stranici i vratiti rezultate kao JSON odgovor u sljedećem formatu
+
+``` 
+[
+  {
+    "full_name": "John Doe",
+    "phone_number": "+123456789",
+    "address": "123 Main St, City",
+    "operator": "Unknown Operator",
+    "profile_url": "https://www.example.com/profile/johndoe"
+  },
+  ...
+]
+```
 
 # Napomena
 Ovaj program se koristi samo u edukacijske svrhe i za osobnu upotrebu. Molimo vas da ga ne koristite za neovlašteno prikupljanje podataka ili bilo koje druge zlonamjerne aktivnosti.
