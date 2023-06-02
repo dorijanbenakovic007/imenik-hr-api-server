@@ -15,8 +15,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from fake_useragent import UserAgent
 
-app = Flask(__name__)
-
 def detect_operator(phone_number):
     phone_number = re.sub(r'[^\d+]', '', phone_number)
   
@@ -88,15 +86,8 @@ def detect_operator(phone_number):
         return "Unknown Operator"
 
 def scrap_url(input,page_id):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    #chrome_options.add_argument("--proxy-server=socks5://127.0.0.1:9150") Tor proxy
-
     user_agent = UserAgent()
     chrome_options.add_argument(f"--user-agent={user_agent.random}")
-    driver = webdriver.Chrome(executable_path='/chromedriver', options=chrome_options)
 
     encoded_input = quote(input)
     search_url = f"https://www.imenik.hr/imenik/trazi/{page_id}/Osobe/sve/sve/vaznost/{encoded_input}.html"
@@ -135,6 +126,16 @@ def scrap_url(input,page_id):
             continue
             
     return entries
+
+app = Flask(__name__)
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+#chrome_options.add_argument("--proxy-server=socks5://127.0.0.1:9150") Tor proxy
+
+driver = webdriver.Chrome(executable_path='/chromedriver', options=chrome_options)
 
 @app.route('/contacts', methods=['POST'])
 def contacts():
